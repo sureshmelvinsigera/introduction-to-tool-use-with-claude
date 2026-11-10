@@ -1,4 +1,6 @@
-# Introduction to Tools
+# Introduction to Tool Use with Claude
+
+![Claude asks. Your code runs.](assets/introduction-to-tool-use-with-claude.png)
 
 #### Learning Objectives
 
@@ -139,8 +141,8 @@ if __name__ == "__main__":
     print("Answer:", result["answer"])
 ```
 
-Install the `anthropic` package, set `ANTHROPIC_API_KEY`, and run it from the `lessons/intro-to-tools` folder. The
-prints are there so you can watch the two calls happen instead of taking the result on faith.
+Install the `anthropic` package, set `ANTHROPIC_API_KEY`, and run it from the repository root. The prints are there
+so you can watch the two calls happen instead of taking the result on faith.
 
 Pay attention to where `get_order_status` is called. It is called by your code, after the first response has come back,
 using the arguments Claude supplied in `request.input`. The model asked; your program ran the function.
@@ -201,3 +203,16 @@ something vague and ask about an order again.
   missing from the history.
 - A response with `stop_reason` equal to `end_turn` means Claude is finished. Whether it asks for a tool at all is
   Claude's decision, based on the question and the descriptions.
+
+---
+
+#### Running the code
+
+```bash
+uv sync                            # or: pip install anthropic
+export ANTHROPIC_API_KEY=...       # fish: set -x ANTHROPIC_API_KEY ...
+
+uv run python order_status_demo.py
+uv run python order_status_demo.py "What is the status of order Z999?"
+uv run python no_tool_needed_demo.py
+```
